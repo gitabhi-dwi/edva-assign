@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Editor</title>
+    <style>
+    
+        .code-editor {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #ccc;
+        }
+        .code-editor__textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            background-color: #fff;
+            border: 1px solid #130101;
+            padding: 5px;
+        }
+        .code-editor__buttons {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .code-editor__button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #e5499e;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .code-editor__button:hover {
+            background-color: #3f0e4f;
+        }
+        .code-editor__locked {
+            background-color: #f2f2f2;
+            pointer-events: none;
+        }
+        .bookmark {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            color: #007bff;
+        }
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="C:\Users\ASUS\OneDrive\Desktop\abhi\edvanta assignment\edvanta.jfif" alt="Your Logo">
+    </div>
+    <div class="bookmark">Abhishek</div>
+    <div class="code-editor">
+        <textarea class="code-editor__textarea"></textarea>
+        <div class="code-editor__buttons">
+            <button class="code-editor__button" id="copy-button">Copy</button>
+            <button class="code-editor__button" id="save-button">Save</button>
+            <button class="code-editor__button" id="lock-button">Lock</button>
+        </div>
+    </div>
+
+    <script>
+        const textarea = document.querySelector('.code-editor__textarea');
+        const copyButton = document.getElementById('copy-button');
+        const saveButton = document.getElementById('save-button');
+        const lockButton = document.getElementById('lock-button');
+
+        // Function to copy the content of the textarea to the clipboard
+        copyButton.addEventListener('click', () => {
+            textarea.select();
+            document.execCommand('copy');
+        });
+
+        // Function to save the content (you can implement your save logic here)
+        saveButton.addEventListener('click', () => {
+            const content = textarea.value;
+            // Implement save functionality, e.g., send content to a server.
+            console.log('Content saved:', content);
+        });
+
+        // Function to toggle the lock/unlock state
+        let isLocked = false;
+        lockButton.addEventListener('click', () => {
+            isLocked = !isLocked;
+            textarea.disabled = isLocked;
+
+            if (isLocked) {
+                lockButton.innerHTML = 'Unlock';
+                textarea.classList.add('code-editor__locked');
+            } else {
+                lockButton.innerHTML = 'Lock';
+                textarea.classList.remove('code-editor__locked');
+            }
+        });
+    </script>
+</body>
+</html>
